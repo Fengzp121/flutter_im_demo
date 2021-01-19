@@ -1,0 +1,1 @@
+extension MYExtension on String {}
