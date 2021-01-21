@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_im_demo/base/utils/widget_util.dart';
 import 'package:flutter_im_demo/page/chat/view_models/chat_list_viewmodels.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -10,6 +11,7 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   ChatListViewModel chatListViewModel;
+  ScrollController _scrollController;
 
   @override
   void initState() {
@@ -40,6 +42,18 @@ class _ChatListPageState extends State<ChatListPage> {
   }
 
   _buildListView() {
-    return ListView.builder(itemBuilder: null);
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: chatListViewModel.dataSource.length,
+      controller: _scrollController,
+      itemBuilder: (BuildContext context, int index) {
+        if (chatListViewModel.dataSource.length <= 0) {
+          return WidgetUtil.buildEmptyWidget();
+        }
+        return Container();
+        // return ConversationListItem(
+        //     delegate: this, conversation: chatListViewModel.dataSource[index]);
+      },
+    );
   }
 }
