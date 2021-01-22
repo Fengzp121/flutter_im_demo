@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im_demo/page/login/login_page.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:aspectd/aspectd.dart';
+import 'base/router/router.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      onGenerateRoute: onGenerateRoute,
       home: LoginInPage(),
     );
   }

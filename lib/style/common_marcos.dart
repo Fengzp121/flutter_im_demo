@@ -9,18 +9,20 @@ class MessageDirection {
 
 //消息状态
 class MessageStatus {
-  //未读，已发送之类的
-  ///接收
-  static const int RECEIVE = 1;
+  ///发送中
+  static const int SENDING = 11;
 
   ///发送
-  static const int SEND = 2;
+  static const int SEND = 12;
 
   ///发送失败
-  static const int SENDFAIL = 3;
+  static const int SENDFAIL = 13;
 
-  ///接收失败
-  static const int RECEIVEFAIL = 4;
+  ///未读
+  static const int UNREAD = 21;
+
+  ///已读
+  static const int READED = 22;
 }
 
 ///消息类型

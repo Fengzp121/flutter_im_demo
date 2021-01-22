@@ -1,22 +1,27 @@
-import 'package:flutter_im_demo/data_mode/model/message_model.dart';
-
-import 'message_content.dart';
+import 'message_model.dart';
 
 class ConversationModel {
   int conversationType;
   String targetId;
-  int unreadMessageCount;
-  int receivedStatus;
-  int sentStatus;
-  int sentTime;
+  int unreadCount;
+  // int sendStatus;//待定
+  int sendTime;
   bool isTop;
-  String objectName;
-  String senderUserId;
-  int latestMessageId;
-  MessageContent latestMessageContent;
-  int mentionedCount; // 会话中@消息的个数
-  String draft; //会话草稿内容
+  // String objectName;//待定
+  // String senderUserId;//从message中获取
+  // int latestMessageId;//从message中获取
+  MessageModel latestMessage;
+  // int mentionedCount; // 会话中@消息的个数//TODO：后期做
+  String draft = ''; //会话草稿内容
 
-  //如果 content 为 null ，说明消息内容本身未被 flutter 层正确解析，则消息内容会保存到该 map 中
-  Map originContentMap;
+  ConversationModel.fromJson(Map map) {
+    conversationType = map['conversationType'];
+    targetId = map['targetId'];
+    if (map['unreadCount'] != null) {
+      unreadCount = map['unreadCount'];
+    }
+    sendTime = map['sendTime'];
+    isTop = map['isTop'];
+    latestMessage = MessageModel.fromJson(map['latestMessage']);
+  }
 }

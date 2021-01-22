@@ -1,3 +1,6 @@
+import 'package:flutter_im_demo/data_mode/model/message_content.dart';
+import 'package:flutter_im_demo/style/common_marcos.dart';
+
 class MessageModel {
   MessageModel(
       {this.msgId,
@@ -6,6 +9,21 @@ class MessageModel {
       this.direction,
       this.time,
       this.conversationId});
+
+  MessageModel.fromJson(Map map) {
+    conversationId = map['conversationId'] ?? '';
+    msgId = map['msgId'];
+    switch (messageType) {
+      case MessageType.TEXT:
+        content = TextContent.from(map['content']);
+        break;
+      default:
+        content = MessageContent();
+    }
+    messageType = map['messageType'];
+    direction = map['direction'];
+    time = map['time'];
+  }
 
   //会话Id
   String conversationId;
@@ -25,8 +43,11 @@ class MessageModel {
   // 1:发的 2:接收的
   int direction;
 
-  //接收或发送时间,最好是时间戳
+  //发送时间,最好是时间戳
   int time;
+
+  ///发送者的Id
+  String senderId;
 
   String toString() {
     return null;

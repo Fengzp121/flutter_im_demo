@@ -15,6 +15,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.6.0"
+  aspectd:
+    dependency: "direct main"
+    description:
+      name: aspectd
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.8"
   async:
     dependency: transitive
     description:
