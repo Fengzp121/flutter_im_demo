@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: onGenerateRoute,
-      home: LoginInPage(),
+      home: MyHomePage(
+        title: '尼玛没了',
+      ),
     );
   }
 }
@@ -33,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  IO.Socket socket = IO.io('http://localhost:3000');
+  IO.Socket socket = IO.io('http://192.168.199.203:8080');
   String currentMessage = '0';
 
   void _incrementCounter() {
@@ -47,6 +49,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     socket.onConnect((_) {});
+    socket.onConnectError((data) {
+      print('connect-error:$data');
+    });
+    socket.onConnectTimeout((data) {
+      print('onConnectTimeout:$data');
+    });
+    socket.onConnecting((data) {
+      print('onConnecting:$data');
+    });
+    socket.onReconnect((data) {
+      print('onReconnect:$data');
+    });
+    socket.onPing((data) {
+      print('onPing:$data');
+    });
+    socket.onError((data) {
+      print('error:$data');
+    });
     super.initState();
     socket.on('event', (data) {
       print('receive:$data');

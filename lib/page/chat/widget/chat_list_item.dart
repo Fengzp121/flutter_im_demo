@@ -85,14 +85,15 @@ class _ConversationListItemState extends State<ConversationListItem> {
     List<Widget> _rightArea = <Widget>[
       Text(time,
           style: TextStyle(
-              fontSize: RCFont.ConListTimeFont,
-              color: Color(RCColor.ConListTimeColor))),
+              //fontSize: RCFont.ConListTimeFont,
+              //color: Color(RCColor.ConListTimeColor),
+              )),
       SizedBox(
         height: 15,
       )
     ];
     return Container(
-      width: RCLayout.ConListItemHeight,
+      // width: RCLayout.ConListItemHeight,
       margin: EdgeInsets.only(right: 8),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center, children: _rightArea),
@@ -100,18 +101,19 @@ class _ConversationListItemState extends State<ConversationListItem> {
   }
 
   Widget _buildTitle() {
-    String title = (widget.conversation.conversationType ==
-                RCConversationType.Private
-            ? "单聊："
-            : "群聊：") +
-        (widget.info == null || widget.info.id == null ? "" : widget.info.id);
+    String title = '';
+    // String title = (widget.conversation.conversationType ==
+    //             RCConversationType.Private
+    //         ? "单聊："
+    //         : "群聊：") +
+    //     (widget.info == null || widget.info.id == null ? "" : widget.info.id);
     String digest = "";
     if (widget.conversation.latestMessage != null) {
       // if (widget.conversation.latestMessage.destructDuration != null &&
       //     widget.conversation.latestMessage.destructDuration > 0) {
       //   digest = "[阅后即焚]";
       // } else {
-      digest = widget.conversation.latestMessageContent.conversationDigest();
+      //digest = widget.conversation.latestMessageContent.conversationDigest();
       // }
     } else {
       digest = "无法识别消息 ";
@@ -127,9 +129,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
           Text(
             title,
             style: TextStyle(
-                fontSize: RCFont.ConListTitleFont,
-                color: Color(RCColor.ConListTitleColor),
-                fontWeight: FontWeight.w400),
+                fontSize: 12, color: Colors.red, fontWeight: FontWeight.w400),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -164,9 +164,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
             width: screenWidth - 170,
             child: Text(
               digest,
-              style: TextStyle(
-                  fontSize: RCFont.ConListDigestFont,
-                  color: Color(RCColor.ConListDigestColor)),
+              style: TextStyle(fontSize: 14, color: Colors.red),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ))
@@ -174,9 +172,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
     } else {
       return Text(
         digest,
-        style: TextStyle(
-            fontSize: RCFont.ConListDigestFont,
-            color: Color(RCColor.ConListDigestColor)),
+        style: TextStyle(fontSize: 14, color: Colors.red),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -187,18 +183,16 @@ class _ConversationListItemState extends State<ConversationListItem> {
     if (count <= 0 || count == null) {
       return WidgetUtil.buildEmptyWidget();
     }
-    double width = count > 100 ? 25 : RCLayout.ConListUnreadSize;
+    double width = count > 100 ? 25 : 15;
     return Container(
         width: width,
-        height: RCLayout.ConListUnreadSize,
+        height: 20,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(width / 2.0),
-            color: Color(RCColor.ConListUnreadColor)),
+            color: Colors.red),
         child: Text(count.toString(),
-            style: TextStyle(
-                fontSize: RCFont.ConListUnreadFont,
-                color: Color(RCColor.ConListUnreadTextColor))));
+            style: TextStyle(fontSize: 14, color: Colors.red)));
   }
 
   @override
@@ -238,7 +232,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color(RCColor.ConListItemBgColor),
+      color: Colors.red,
       child: InkWell(
         onTapDown: (TapDownDetails details) {
           tapPos = details.globalPosition;
@@ -250,10 +244,8 @@ class _ConversationListItemState extends State<ConversationListItem> {
           _onLongPressed();
         },
         child: Container(
-          height: RCLayout.ConListItemHeight,
-          color: widget.conversation.isTop
-              ? Color(RCColor.ConListTopBgColor)
-              : Color(RCColor.ConListItemBgColor),
+          height: 70,
+          color: widget.conversation.isTop ? Colors.red : Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[_buildPortrait(), _buildContent()],
