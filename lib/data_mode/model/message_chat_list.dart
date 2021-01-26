@@ -22,6 +22,8 @@ class ConversationModel {
     }
     sendTime = map['sendTime'];
     isTop = map['isTop'];
-    latestMessage = MessageModel.fromJson(map['latestMessage']);
+    if (map['latestMessage'] != null) {
+      latestMessage = MessageModel.fromJson(map['latestMessage']);
+    }
   }
 }

@@ -45,11 +45,12 @@ class WidgetUtil {
   }
 
   /// 用户头像
-  static Widget buildUserPortrait(String path) {
+  static Widget buildUserPortrait({String path}) {
     Widget protraitWidget;
     if (path == null || path.isEmpty) {
-      protraitWidget =
-          Image.asset("images_chat/service_avatar.png", fit: BoxFit.fill);
+      protraitWidget = Icon(Icons.error);
+      //protraitWidget =
+      //    Image.asset("images_chat/service_avatar.png", fit: BoxFit.fill);
     } else {
       if (path.startsWith("http")) {
         protraitWidget = CachedNetworkImage(

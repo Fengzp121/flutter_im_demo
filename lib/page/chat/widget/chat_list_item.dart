@@ -50,7 +50,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
             SizedBox(
               width: 8,
             ),
-            WidgetUtil.buildUserPortrait('widget.info?.portraitUrl'),
+            WidgetUtil.buildUserPortrait(),
           ],
         ),
         Positioned(
@@ -232,7 +232,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.red,
+      // color: Colors.red,
       child: InkWell(
         onTapDown: (TapDownDetails details) {
           tapPos = details.globalPosition;

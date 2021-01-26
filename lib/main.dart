@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im_demo/page/login/login_page.dart';
+import 'package:flutter_im_demo/page/tab/main_tab_page.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:aspectd/aspectd.dart';
 import 'base/router/router.dart';
@@ -19,9 +20,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: onGenerateRoute,
-      home: MyHomePage(
-        title: '尼玛没了',
-      ),
+      home: MainTabPage(),
+      // home: MyHomePage(
+      //   title: '尼玛没了',
+      // ),
     );
   }
 }

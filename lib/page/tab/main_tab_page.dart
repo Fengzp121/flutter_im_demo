@@ -28,7 +28,6 @@ class _MainTabPageState extends State<MainTabPage> {
   ];
 
   int currentIndex;
-  final pages = [ChatListPage(), DiscoveryPage(), PersonPage()];
 
   @override
   void initState() {
@@ -42,10 +41,15 @@ class _MainTabPageState extends State<MainTabPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: bottomNavItems,
         currentIndex: currentIndex,
-        type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
+          print(index);
           _changePage(index);
         },
+      ),
+      body: IndexedStack(
+        index: currentIndex,
+        children: <Widget>[ChatListPage(), DiscoveryPage(), PersonPage()],
       ),
     );
   }

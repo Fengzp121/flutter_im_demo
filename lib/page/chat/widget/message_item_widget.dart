@@ -37,7 +37,7 @@ class MessageItem extends StatelessWidget {
             onTap: () {
               debugPrint('点击了头像');
             },
-            child: WidgetUtil.buildUserPortrait(''),
+            child: WidgetUtil.buildUserPortrait(),
           ),
           _buildMessageItem(),
         ],
