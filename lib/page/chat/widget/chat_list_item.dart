@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im_demo/base/utils/time_util.dart';
 import 'package:flutter_im_demo/base/utils/widget_util.dart';
-import 'package:flutter_im_demo/data_mode/model/message_chat_list.dart';
+import 'package:flutter_im_demo/data_mode/message_chat_list.dart';
 import '../../../style/style.dart';
 
 import 'dart:developer' as developer;

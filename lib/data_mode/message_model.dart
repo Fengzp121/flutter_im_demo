@@ -1,4 +1,4 @@
-import 'package:flutter_im_demo/data_mode/model/message_content.dart';
+import 'package:flutter_im_demo/data_mode/message_content.dart';
 import 'package:flutter_im_demo/style/common_marcos.dart';
 
 class MessageModel {

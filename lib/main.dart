@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_im_demo/page/login/login_page.dart';
+// import 'package:flutter_im_demo/page/login/login_page.dart';
 import 'package:flutter_im_demo/page/tab/main_tab_page.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:aspectd/aspectd.dart';
+// import 'package:socket_io_client/socket_io_client.dart' as IO;
+// import 'package:aspectd/aspectd.dart';
 import 'base/router/router.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/status.dart' as status;
 
 void main() {
   runApp(MyApp());
 }
 
+//TODO：埋点记录所有操作记录
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -20,10 +23,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: onGenerateRoute,
-      home: MainTabPage(),
-      // home: MyHomePage(
-      //   title: '尼玛没了',
-      // ),
+      //home: MainTabPage(),
+      home: MyHomePage(
+        title: '尼玛没了',
+      ),
     );
   }
 }
@@ -37,11 +40,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  IO.Socket socket = IO.io('http://192.168.199.203:8080');
+  // IO.Socket socket = IO.io('ws://192.168.199.203:8080/Ws', <String, dynamic>{
+  //   'transports': ['websocket'],
+  // });
+  IOWebSocketChannel channel;
   String currentMessage = '0';
 
   void _incrementCounter() {
-    socket.emit('msg', 'test');
+    //socket.emit('msg', 'test msg');
+    channel.sink.add('/fuck,fuck u!');
     setState(() {
       print('send:test');
       currentMessage = 'test';
@@ -50,37 +57,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    socket.onConnect((_) {});
-    socket.onConnectError((data) {
-      print('connect-error:$data');
-    });
-    socket.onConnectTimeout((data) {
-      print('onConnectTimeout:$data');
-    });
-    socket.onConnecting((data) {
-      print('onConnecting:$data');
-    });
-    socket.onReconnect((data) {
-      print('onReconnect:$data');
-    });
-    socket.onPing((data) {
-      print('onPing:$data');
-    });
-    socket.onError((data) {
-      print('error:$data');
-    });
+    _initSocket();
+    // socket.onConnect((_) {});
+    // socket.onConnectError((data) {
+    //   print('connect-error:$data');
+    // });
+    // socket.onConnectTimeout((data) {
+    //   print('onConnectTimeout:$data');
+    // });
+    // socket.onConnecting((data) {
+    //   print('onConnecting:$data');
+    // });
+    // socket.onReconnect((data) {
+    //   print('onReconnect:$data');
+    // });
+    // socket.onPing((data) {
+    //   print('onPing:$data');
+    // });
+    // socket.onError((data) {
+    //   print('error:$data');
+    // });
+
+    // socket.on('event', (data) {
+    //   print('receive:$data');
+    //   setState(() {
+    //     currentMessage = data;
+    //   });
+    // });
     super.initState();
-    socket.on('event', (data) {
-      print('receive:$data');
-      setState(() {
-        currentMessage = data;
-      });
+  }
+
+  Future _initSocket() async {
+    channel = IOWebSocketChannel.connect('ws://192.168.199.203:8080/Ws/10001');
+
+    channel.stream.listen((message) {
+      print(message);
     });
   }
 
   @override
   void dispose() {
-    socket.onDisconnect((_) => print('disconnect'));
+    //socket.onDisconnect((_) => print('disconnect'));
+    channel.sink.close(status.goingAway);
     super.dispose();
   }
 

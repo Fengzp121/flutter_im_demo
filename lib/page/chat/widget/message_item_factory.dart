@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_im_demo/data_mode/model/message_content.dart';
-import 'package:flutter_im_demo/data_mode/model/message_model.dart';
+import 'package:flutter_im_demo/data_mode/message_content.dart';
+import 'package:flutter_im_demo/data_mode/message_model.dart';
 import 'package:flutter_im_demo/style/common_marcos.dart';
 
 //消息生成工厂类，感觉可以用来只生成一些比较简单的message。

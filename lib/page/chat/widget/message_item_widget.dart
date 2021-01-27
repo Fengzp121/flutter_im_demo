@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../../../data_mode/model/message_model.dart';
+import '../../../data_mode/message_model.dart';
 import '../../../style/common_marcos.dart';
 import '../../../base/utils/widget_util.dart';
 import 'message_item_factory.dart';

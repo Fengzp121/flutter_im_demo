@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_im_demo/data_mode/model/message_model.dart';
+import 'package:flutter_im_demo/data_mode/message_model.dart';
 import 'widget/message_list_widget.dart';
 import 'widget/input_bar_widget.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im_demo/base/utils/widget_util.dart';
-import 'package:flutter_im_demo/data_mode/model/message_chat_list.dart';
+import 'package:flutter_im_demo/data_mode/message_chat_list.dart';
 import 'package:flutter_im_demo/page/chat/view_models/chat_list_viewmodels.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -32,6 +32,7 @@ class _ChatListPageState extends State<ChatListPage>
         backgroundColor: Colors.red,
       ),
       body: SafeArea(
+        //一次性加载完成
         // child: SmartRefresher(
         //   controller: null,
         //   enablePullUp: true,
@@ -76,5 +77,20 @@ class _ChatListPageState extends State<ChatListPage>
   @override
   void didTapConversation(ConversationModel conversation) {
     // TODO: implement didTapConversation
+  }
+}
+
+class ChatListPageTitle extends StatefulWidget {
+  @override
+  _ChatListPageTitleState createState() => _ChatListPageTitleState();
+}
+
+class _ChatListPageTitleState extends State<ChatListPageTitle> {
+  @override
+  Widget build(BuildContext context) {
+    //根据连接状态来改变
+    return Container(
+      child: Text(''),
+    );
   }
 }

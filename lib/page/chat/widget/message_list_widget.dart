@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im_demo/page/chat/view_models/chatroom_viewmodels.dart';
 import 'package:provider/provider.dart';
-import '../../../data_mode/model/message_model.dart';
+import '../../../data_mode/message_model.dart';
 import '../../../base/utils/widget_util.dart';
 
 import 'message_item_widget.dart';
