@@ -1,6 +1,6 @@
 import 'package:flutter_im_demo/service/http_util.dart';
 import 'package:flutter_im_demo/service/sqflite_util.dart';
-import 'package:flutter_im_demo/service/websocket_util.dart';
+import 'package:flutter_im_demo/service/socket_io_util.dart';
 
 import 'api_config.dart';
 

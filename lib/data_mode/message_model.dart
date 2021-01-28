@@ -8,6 +8,7 @@ class MessageModel {
       this.messageType,
       this.direction,
       this.time,
+      this.status,
       this.conversationId});
 
   MessageModel.fromJson(Map map) {
@@ -20,12 +21,13 @@ class MessageModel {
       default:
         content = MessageContent();
     }
+    status = map['status'];
     messageType = map['messageType'];
     direction = map['direction'];
     time = map['time'];
   }
 
-  //会话Id
+  //会话Id，也是接收者的id
   String conversationId;
 
   //消息对应的ID
@@ -45,6 +47,9 @@ class MessageModel {
 
   //发送时间,最好是时间戳
   int time;
+
+  ///消息状态
+  int status;
 
   ///发送者的Id
   String senderId;

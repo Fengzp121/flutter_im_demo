@@ -1,19 +1,19 @@
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class WebSocketUtil {
-  factory WebSocketUtil() => _getInstance();
-  static WebSocketUtil get instance => _getInstance();
-  static WebSocketUtil _instance;
+class SocketUtil {
+  factory SocketUtil() => _getInstance();
+  static SocketUtil get instance => _getInstance();
+  static SocketUtil _instance;
   IO.Socket _socket;
 
   //FlutterAudioRecorder _recorder;
-  WebSocketUtil._internal() {
+  SocketUtil._internal() {
     // 初始化
   }
 
-  static WebSocketUtil _getInstance() {
+  static SocketUtil _getInstance() {
     if (_instance == null) {
-      _instance = WebSocketUtil._internal();
+      _instance = SocketUtil._internal();
     }
     return _instance;
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_im_demo/data_mode/message_model.dart';
+import 'package:flutter_im_demo/style/common_marcos.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -27,11 +28,11 @@ class SqlfiteUtil {
     _db = await openDatabase(_dbPath);
   }
 
-  Future createTable(String chatRoomId) async {
-    await _db.execute('CREATE TABLE Chat_$chatRoomId (' +
+  Future createTable(String conversationId) async {
+    await _db.execute('CREATE TABLE Chat_$conversationId (' +
         'tableVer INTEGER' +
-        'msgLocalID INTEGER PRIMARY KEY,' +
-        'msgSvrID INTEGER, ' +
+        'msgLocalID INTEGER PRIMARY KEY AUTOINCREMENT,' +
+        'msgSvrID TEXT, ' +
         'createTime INTEGER, ' +
         'message TEXT, ' +
         'status INTEGER, ' +
@@ -40,12 +41,25 @@ class SqlfiteUtil {
         'des INTEGER)');
   }
 
-  Future insertRow(MessageModel messageModel) async {
+  Future dropTable(String conversationId) async {
+    await _db.execute('drop table Chat_$conversationId');
+  }
+
+  Future insertRow(MessageModel msg) async {
     _db.rawInsert(
-        'insert into  Chat_${messageModel.conversationId} ' +
-            '(tableVer,msgLocalID,msgSvrID,createTiem,message,status,imageStatus,type,des)' +
+        'insert into  Chat_${msg.conversationId} ' +
+            '(tableVer,msgSvrID,createTiem,message,status,imageStatus,type,des)' +
             'VALUES (?,?,?,?,?,?,?,?,?)',
-        messageModel.toString());
+        [
+          1,
+          msg.msgId,
+          msg.time,
+          msg.content,
+          msg.status,
+          msg.messageType == MessageType.IMAGE ? 1 : 0,
+          msg.messageType,
+          msg.direction
+        ]);
   }
 
   Future updateRow() async {}
