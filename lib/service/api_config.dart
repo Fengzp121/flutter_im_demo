@@ -1,3 +1,6 @@
+// class
+
 class API {
-  static const String Login = '/login';
+  static const String LoginIn = '/loginIn';
+  static const String LoginOut = '/loginOut';
 }

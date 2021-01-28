@@ -1,9 +1,10 @@
 import 'package:flutter_im_demo/service/http_util.dart';
+import 'package:flutter_im_demo/service/sqflite_util.dart';
 import 'package:flutter_im_demo/service/websocket_util.dart';
 
 import 'api_config.dart';
 
-class Client {
+class Client with _Http, _Sql, _SocketIO {
   factory Client() => _getInstance();
   static Client get instance => _getInstance();
   static Client _instance;
@@ -18,11 +19,18 @@ class Client {
     }
     return _instance;
   }
+}
 
-  login({dynamic data}) {
-    HttpUtil.dio.post(
-      API.Login,
-      data: {},
-    );
+mixin _Http {
+  loginIn({dynamic data, Function succ, Function fail}) {
+    HttpUtil.post(API.LoginIn, succ, errorCallback: fail, params: data);
+  }
+
+  loginOut({dynamic data, Function succ, Function fail}) {
+    HttpUtil.post(API.LoginOut, succ, errorCallback: fail, params: data);
   }
 }
+
+mixin _Sql {}
+
+mixin _SocketIO {}
