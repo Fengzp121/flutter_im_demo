@@ -5,6 +5,7 @@ import 'package:flutter_im_demo/data_mode/message_chat_list.dart';
 class ChatListViewModel extends ChangeNotifier {
   List<ConversationModel> dataSource;
 
+  ///test code
   Future makeData() async {
     dataSource = List();
     print('makeData');

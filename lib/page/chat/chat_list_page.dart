@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_im_demo/base/utils/widget_util.dart';
 import 'package:flutter_im_demo/data_mode/message_chat_list.dart';
 import 'package:flutter_im_demo/page/chat/view_models/chat_list_viewmodels.dart';
+import 'package:flutter_im_demo/service/client.dart';
+import 'package:flutter_im_demo/service/sqflite_util.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -28,8 +30,24 @@ class _ChatListPageState extends State<ChatListPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('消息'),
+        title: ChatListPageTitle(),
         backgroundColor: Colors.red,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Client.instance.createChatRoom();
+              }),
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () async {
+                List datas = await SqlfiteUtil.instance.selectAllChat();
+                for (var item in datas) {
+                  chatListViewModel.dataSource
+                      .add(ConversationModel.fromJson(item));
+                }
+              })
+        ],
       ),
       body: SafeArea(
         //一次性加载完成
@@ -86,11 +104,13 @@ class ChatListPageTitle extends StatefulWidget {
 }
 
 class _ChatListPageTitleState extends State<ChatListPageTitle> {
+  String titleStr = '我是标题';
+
   @override
   Widget build(BuildContext context) {
     //根据连接状态来改变
     return Container(
-      child: Text(''),
+      child: Text(titleStr),
     );
   }
 }

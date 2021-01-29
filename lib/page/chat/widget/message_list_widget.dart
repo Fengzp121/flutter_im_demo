@@ -53,7 +53,7 @@ class _MessageListState extends State<MessageListWidget> {
           shrinkWrap: true,
           //因为消息超过一屏，ListView 很难滚动到最底部，所以要翻转显示，同时数据源也要逆序
           reverse: true,
-          controller: _scrollController,
+          controller: _scrollController, //可以监听scroll的滑动高度来提前获取历史记录
           itemCount: messageDataSource.length,
           itemBuilder: (BuildContext context, int index) {
             if (messageDataSource.length != null &&

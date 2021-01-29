@@ -8,7 +8,7 @@ class SqlfiteUtil {
   factory SqlfiteUtil() => _getInstance();
   static SqlfiteUtil get instance => _getInstance();
   static SqlfiteUtil _instance;
-  Database _db;
+  Database db;
   String _dbPath;
 
   SqlfiteUtil._internal() {
@@ -25,11 +25,11 @@ class SqlfiteUtil {
   //这db是根据用户标示创建的
   openDatabase(String dbName) async {
     _dbPath = await _initDeleteDb(dbName);
-    _db = await openDatabase(_dbPath);
+    db = await openDatabase(_dbPath);
   }
 
   Future createTable(String conversationId) async {
-    await _db.execute('CREATE TABLE Chat_$conversationId (' +
+    await db.execute('CREATE TABLE Chat_$conversationId (' +
         'tableVer INTEGER' +
         'msgLocalID INTEGER PRIMARY KEY AUTOINCREMENT,' +
         'msgSvrID TEXT, ' +
@@ -42,11 +42,11 @@ class SqlfiteUtil {
   }
 
   Future dropTable(String conversationId) async {
-    await _db.execute('drop table Chat_$conversationId');
+    await db.execute('drop table Chat_$conversationId');
   }
 
   Future insertRow(MessageModel msg) async {
-    _db.rawInsert(
+    db.rawInsert(
         'insert into  Chat_${msg.conversationId} ' +
             '(tableVer,msgSvrID,createTiem,message,status,imageStatus,type,des)' +
             'VALUES (?,?,?,?,?,?,?,?,?)',
@@ -60,6 +60,12 @@ class SqlfiteUtil {
           msg.messageType,
           msg.direction
         ]);
+  }
+
+  Future<List<Map<String, dynamic>>> selectAllChat() async {
+    return await db.rawQuery(
+        'select name from sqlite_master where type = \'table\' name like \'Chat_\'');
+    // _db.rawQuery('select * from Chat order by createTime ASC');
   }
 
   Future updateRow() async {}

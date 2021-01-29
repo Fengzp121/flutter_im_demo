@@ -1,6 +1,7 @@
 import 'package:flutter_im_demo/service/http_util.dart';
 import 'package:flutter_im_demo/service/sqflite_util.dart';
 import 'package:flutter_im_demo/service/socket_io_util.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'api_config.dart';
 
@@ -31,6 +32,26 @@ mixin _Http {
   }
 }
 
-mixin _Sql {}
+mixin _Sql {
+  ///test code
+
+  createChatRoom() async {
+    await SqlfiteUtil.instance.openDatabase('ffzp');
+    Batch batch = SqlfiteUtil.instance.db.batch();
+    for (var i = 0; i < 20; i++) {
+      batch.execute('CREATE TABLE Chat_$i (' +
+          'tableVer INTEGER' +
+          'msgLocalID INTEGER PRIMARY KEY AUTOINCREMENT,' +
+          'msgSvrID TEXT, ' +
+          'createTime INTEGER, ' +
+          'message TEXT, ' +
+          'status INTEGER, ' +
+          'imgStatus INTEGER, ' +
+          'type INTEGER, ' +
+          'des INTEGER)');
+    }
+    batch.commit();
+  }
+}
 
 mixin _SocketIO {}
