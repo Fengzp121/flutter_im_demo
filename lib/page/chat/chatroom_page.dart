@@ -9,12 +9,12 @@ class ChatRoomPage extends StatefulWidget {
 }
 
 class _ChatRoomPageState extends State<ChatRoomPage>
-    implements MessageListDelegate {
+    implements MessageListDelegate, InputBarWidgetDelegate {
   InputBarWidget _inputBarWidget;
   MessageListWidget _messageListWidget;
   @override
   void initState() {
-    _inputBarWidget = InputBarWidget();
+    _inputBarWidget = InputBarWidget(delegate: this);
     _messageListWidget = MessageListWidget(delegate: this);
     super.initState();
   }
@@ -63,5 +63,20 @@ class _ChatRoomPageState extends State<ChatRoomPage>
   @override
   void didTapMessageItem(MessageModel message) {
     // TODO: implement didTapMessageItem
+  }
+
+  @override
+  void clickExtButton() {
+    // TODO: implement clickExtButton
+  }
+
+  @override
+  void inputBarStatusChanged(InputBarStatus status) {
+    // TODO: implement inputBarStatusChanged
+  }
+
+  @override
+  void sendMessage(String message) {
+    // TODO: implement sendMessage
   }
 }
