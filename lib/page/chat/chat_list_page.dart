@@ -22,6 +22,7 @@ class _ChatListPageState extends State<ChatListPage>
   @override
   void initState() {
     chatListViewModel = ChatListViewModel();
+    //获取对话列表，并更新界面
     chatListViewModel.makeData();
     super.initState();
   }
@@ -50,18 +51,10 @@ class _ChatListPageState extends State<ChatListPage>
         ],
       ),
       body: SafeArea(
-        //一次性加载完成
-        // child: SmartRefresher(
-        //   controller: null,
-        //   enablePullUp: true,
-        //   header: MaterialClassicHeader(),
-        //   onRefresh: () {},
-        //   onLoading: () {},
         child: ChangeNotifierProvider(
           create: (_) => chatListViewModel,
           child: _buildListView(),
         ),
-        // ),
       ),
     );
   }

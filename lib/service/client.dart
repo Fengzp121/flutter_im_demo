@@ -5,6 +5,8 @@ import 'package:sqflite/sqflite.dart';
 
 import 'api_config.dart';
 
+//插入数据库的东西需要有一个记录，如果发生了插入失败之类的操作，需要记录下来id，下次拉取的时候再拉一次。
+//但是这次获取的数据是不需要再插入到现有的聊天界面上的。
 class Client with _Http, _Sql, _SocketIO {
   factory Client() => _getInstance();
   static Client get instance => _getInstance();
